@@ -26,8 +26,11 @@ def get_imac_spec_kr():
         idx = 0
         while idx < len(dom_element_text_list):
             dom_element_text_list[idx] = dom_element_text_list[idx].replace(' 프로세서', '')
+            dom_element_text_list[idx] = dom_element_text_list[idx].replace('Boost ', 'Boost')
             dom_element_text_list[idx] = dom_element_text_list[idx].replace(' 드라이브1', '')
             dom_element_text_list[idx] = dom_element_text_list[idx].replace(' 드라이브 1', '')
+            dom_element_text_list[idx] = dom_element_text_list[idx].replace(' Drive1', 'Drive')
+            dom_element_text_list[idx] = dom_element_text_list[idx].replace(' Drive 1', 'Drive')
             dom_element_text_list[idx] = dom_element_text_list[idx].replace(' 비디오 메모리', '')
             idx += 1
 
