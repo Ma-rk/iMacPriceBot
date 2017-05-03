@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 
 URL_KR = "https://www.apple.com/kr/shop/buy-mac/imac"
 HTML_BODY_KR = BeautifulSoup(urlopen(URL_KR).read(), "html.parser")
+URL_JP = "https://www.apple.com/jp/shop/buy-mac/imac"
+HTML_BODY_JP = BeautifulSoup(urlopen(URL_JP).read(), "html.parser")
 
 IMAC_SPEC_LIST = []
 
@@ -30,6 +32,19 @@ i = 0
 for dom_element in HTML_BODY_KR.find_all('span', {'class': "current_price"}):
     dom_element_text = dom_element.text
     dom_element_text = dom_element_text.replace('￦', '')
+    dom_element_text = dom_element_text.replace(' ', '')
+    dom_element_text = dom_element_text.replace('\n', '')
+    dom_element_text = dom_element_text.replace(',', '')
+    IMAC_SPEC_LIST[i].append(dom_element_text)
+    i += 1
+
+print(IMAC_SPEC_LIST)
+
+i = 0
+for dom_element in HTML_BODY_JP.find_all('span', {'class': "current_price"}):
+    dom_element_text = dom_element.text
+    dom_element_text = dom_element_text.replace('￥', '')
+    dom_element_text = dom_element_text.replace('(税別)', '')
     dom_element_text = dom_element_text.replace(' ', '')
     dom_element_text = dom_element_text.replace('\n', '')
     dom_element_text = dom_element_text.replace(',', '')
