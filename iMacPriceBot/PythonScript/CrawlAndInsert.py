@@ -75,6 +75,11 @@ def attatch_rate(rate):
         spec_line.append(int(spec_line[5]) * rate)
 
 
+def insert_spec_and_price():
+    for idx, val in enumerate(IMAC_SPEC_LIST):
+        print(get_insert_qry_line(idx, val))
+
+
 def get_insert_qry_line(idx, val):
     str_list = []
     str_list.append('insert into table_name (column names) values (' + str(idx) + ', ')
@@ -91,5 +96,5 @@ if __name__ == '__main__':
     get_imac_price_jp()
     rate = get_jpy_rate()
     attatch_rate(rate)
-    for spec_line in IMAC_SPEC_LIST:
-        print(spec_line)
+
+    insert_spec_and_price()
