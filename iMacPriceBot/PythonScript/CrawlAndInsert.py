@@ -65,8 +65,9 @@ def get_imac_price_jp():
 def get_jpy_rate():
     for json_line in JSON_LIST:
         if json_line['name'] == "JPYKRW=X":
-            rate = float(json_line['rate'])
+            rate = round(float(json_line['rate']), 2)
             return rate
+
 
 def attatch_rate(rate):
     for spec_line in IMAC_SPEC_LIST:
