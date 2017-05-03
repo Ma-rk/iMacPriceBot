@@ -71,8 +71,8 @@ def get_jpy_rate():
 
 def attatch_rate(rate):
     for spec_line in IMAC_SPEC_LIST:
-        spec_line.append(rate)
-        spec_line.append(int(spec_line[5]) * rate)
+        spec_line.append(str(rate))
+        spec_line.append(str(int(spec_line[5]) * rate))
 
 
 def insert_spec_and_price():
