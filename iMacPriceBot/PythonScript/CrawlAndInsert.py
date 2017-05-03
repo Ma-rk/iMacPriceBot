@@ -75,6 +75,16 @@ def attatch_rate(rate):
         spec_line.append(int(spec_line[5]) * rate)
 
 
+def get_insert_qry_line(idx, val):
+    str_list = []
+    str_list.append('insert into table_name (column names) values (' + str(idx) + ', ')
+    for value in val:
+        str_list.append(value + "', '")
+    str_list[8] = str_list[8][0:-3]
+    str_list.append(');')
+    return ''.join(str_list)
+
+
 if __name__ == '__main__':
     get_imac_spec_kr()
     get_imac_price_kr()
