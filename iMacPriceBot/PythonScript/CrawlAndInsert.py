@@ -1,3 +1,4 @@
+import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -7,6 +8,10 @@ URL_JP = "https://www.apple.com/jp/shop/buy-mac/imac"
 HTML_BODY_JP = BeautifulSoup(urlopen(URL_JP).read(), "html.parser")
 
 IMAC_SPEC_LIST = []
+
+URL_CURRNCY_RATE = "https://api.manana.kr/exchange/rate.json"
+CURRNCY_RATE_JSON = str(urlopen(URL_CURRNCY_RATE).read().decode('utf8'))
+JSON_LIST = json.loads(CURRNCY_RATE_JSON)
 
 for dom_element in HTML_BODY_KR.find_all('ul', {'class': "as-macbundle-modelspecs"}):
     dom_element_text = dom_element.text
@@ -52,3 +57,12 @@ for dom_element in HTML_BODY_JP.find_all('span', {'class': "current_price"}):
     i += 1
 
 print(IMAC_SPEC_LIST)
+
+print(JSON_LIST)
+RATE = 0
+for json_line in JSON_LIST:
+    if json_line['name'] == "JPYKRW=X":
+        RATE = float(json_line['rate'])
+        break
+
+print(RATE)
