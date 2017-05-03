@@ -68,12 +68,17 @@ def get_jpy_rate():
             rate = float(json_line['rate'])
             return rate
 
+def attatch_rate(rate):
+    for spec_line in IMAC_SPEC_LIST:
+        spec_line.append(rate)
+        spec_line.append(int(spec_line[5]) * rate)
+
 
 if __name__ == '__main__':
     get_imac_spec_kr()
     get_imac_price_kr()
     get_imac_price_jp()
+    rate = get_jpy_rate()
+    attatch_rate(rate)
     for spec_line in IMAC_SPEC_LIST:
         print(spec_line)
-    rate = get_jpy_rate()
-    print(rate)
