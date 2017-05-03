@@ -1,6 +1,6 @@
 ﻿namespace iMacPriceBot
 {
-    partial class Form1
+    partial class iMacPriceBot
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // iMacPriceBot
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "iMacPriceBot";
+            this.Text = "iMacPriceBot";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
