@@ -25,3 +25,15 @@ for dom_element in HTML_BODY_KR.find_all('ul', {'class': "as-macbundle-modelspec
     IMAC_SPEC_LIST.append(dom_element_text_list)
 
 print(IMAC_SPEC_LIST)
+
+i = 0
+for dom_element in HTML_BODY_KR.find_all('span', {'class': "current_price"}):
+    dom_element_text = dom_element.text
+    dom_element_text = dom_element_text.replace('￦', '')
+    dom_element_text = dom_element_text.replace(' ', '')
+    dom_element_text = dom_element_text.replace('\n', '')
+    dom_element_text = dom_element_text.replace(',', '')
+    IMAC_SPEC_LIST[i].append(dom_element_text)
+    i += 1
+
+print(IMAC_SPEC_LIST)
