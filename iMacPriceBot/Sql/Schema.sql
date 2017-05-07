@@ -10,5 +10,6 @@ CREATE TABLE `imac_spec_prc` (
   `prc_jpy` char(7) NOT NULL,
   `crrency_rate` char(5) NOT NULL,
   `converted_prc` char(10) NOT NULL,
+  `insert_dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`seq`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
