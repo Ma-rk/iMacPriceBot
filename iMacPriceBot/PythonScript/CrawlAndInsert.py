@@ -77,27 +77,34 @@ def attatch_rate(rate):
 
 
 def insert_spec_and_price():
-    for idx, val in enumerate(IMAC_SPEC_LIST):
-        conn = pymysql.connect(host='localhost'
-                               , user=''
-                               , password=''
-                               , db='imacpricebot'
-                               , charset='utf8')
-        curs = conn.cursor()
-        insert_qry = get_insert_qry_line(idx, val)
-        insert_result = curs.execute(insert_qry)
-        conn.commit()
-        conn.close()
+    conn = pymysql.connect(host='localhost'
+                           , user=''
+                           , password=''
+                           , db='imacpricebot'
+                           , charset='utf8')
+    curs = conn.cursor()
+    curs.execute("select ifnull(max(cwral_seq), '0') from imac_spec_prc")
+    rows = curs.fetchall()
 
+    new_cwral_seq = str(int(rows[0][0]) + 1)
+
+    for idx, val in enumerate(IMAC_SPEC_LIST):
+        insert_qry = get_insert_qry_line(new_cwral_seq, idx, val)
+        insert_result = curs.execute(insert_qry)
+        print(insert_qry)
         print(insert_result)
 
+    conn.commit()
+    conn.close()
 
-def get_insert_qry_line(idx, val):
+
+def get_insert_qry_line(cwral_seq, idx, val):
     model_type = idx + 1
     str_list = []
     str_list.append("insert into imac_spec_prc "
-                    + "(model_type,cpu_default,cpu_max,hdd,graphic,prc_krw,prc_jpy,crrency_rate,converted_prc)"
-                    + " values ('" + str(model_type) + "', '")
+                    + "(cwral_seq,model_type"
+                    + ",cpu_default,cpu_max,hdd,graphic,prc_krw,prc_jpy,crrency_rate,converted_prc)"
+                    + " values ('" + cwral_seq + "', '" + str(model_type) + "', '")
     for value in val:
         str_list.append(value + "', '")
     str_list[8] = str_list[8][0:-3]
