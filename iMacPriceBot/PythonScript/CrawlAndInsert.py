@@ -1,3 +1,4 @@
+import sys
 import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -110,6 +111,14 @@ def get_insert_qry_line(cwral_seq, idx, val):
     str_list[8] = str_list[8][0:-3]
     str_list.append(');')
     return ''.join(str_list)
+
+
+def get_executor():
+    num_of_args = len(sys.argv)
+    if num_of_args <= 1:
+        return 'tester'
+    else:
+        return sys.argv[1]
 
 
 if __name__ == '__main__':
