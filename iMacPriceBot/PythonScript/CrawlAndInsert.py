@@ -72,9 +72,11 @@ def get_jpy_rate():
 
 
 def attatch_rate(rate):
+    executor = get_executor()
     for spec_line in IMAC_SPEC_LIST:
         spec_line.append(str(rate))
         spec_line.append(str(int(spec_line[5]) * rate))
+        spec_line.append(executor)
 
 
 def insert_spec_and_price():
@@ -104,11 +106,12 @@ def get_insert_qry_line(cwral_seq, idx, val):
     str_list = []
     str_list.append("insert into imac_spec_prc "
                     + "(cwral_seq,model_type"
-                    + ",cpu_default,cpu_max,hdd,graphic,prc_krw,prc_jpy,crrency_rate,converted_prc)"
+                    + ",cpu_default,cpu_max,hdd,graphic,prc_krw,prc_jpy,crrency_rate,converted_prc"
+                    + ",executor)"
                     + " values ('" + cwral_seq + "', '" + str(model_type) + "', '")
     for value in val:
         str_list.append(value + "', '")
-    str_list[8] = str_list[8][0:-3]
+    str_list[9] = str_list[9][0:-3]
     str_list.append(');')
     return ''.join(str_list)
 
