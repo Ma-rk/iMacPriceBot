@@ -80,9 +80,15 @@ def attatch_rate(rate):
 
 
 def insert_spec_and_price():
+    db_conn_info = open("./db_conn_info.cfg", 'r')
+    
+    db_conn_info_lines = db_conn_info.readlines()
+    db_conn_info_user = db_conn_info_lines[0][:-1]
+    db_conn_info_password = db_conn_info_lines[1]
+
     conn = pymysql.connect(host='localhost'
-                           , user=''
-                           , password=''
+                           , user=db_conn_info_user
+                           , password=db_conn_info_password
                            , db='imacpricebot'
                            , charset='utf8')
     curs = conn.cursor()
